@@ -1,0 +1,13 @@
+.animal-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    width: 500px;
+}
+
+.long-description {
+    width: 500px;
+}
