@@ -1,0 +1,19 @@
+.animals {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.animal-container {
+    box-shadow: 0 0 10px black;
+    flex: 1 0 30%; 
+    margin: 10px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.animal-container > img {
+    height: 400px;
+    width: 400px;
+    object-fit: contain;
+}
