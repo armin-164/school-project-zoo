@@ -10,30 +10,30 @@ export const Homepage = () => {
 
   useEffect(() => {
     const fetchAnimals = async () => {
-        if (fetched) return;
+      if (fetched) return;
 
-        const localStorageData = localStorage.getItem('animals');
-        if (localStorageData) {
-          setAnimals(JSON.parse(localStorageData));
-          setFetched(true);
-        } else {
-          const data = await getData();
-          localStorage.setItem('animals', JSON.stringify(data));
-          setAnimals(data);
-          setFetched(true);
-        }
+      const localStorageData = localStorage.getItem('animals');
+      if (localStorageData) {
+        setAnimals(JSON.parse(localStorageData));
+        setFetched(true);
+      } else {
+        const data = await getData();
+        localStorage.setItem('animals', JSON.stringify(data));
+        setAnimals(data);
+        setFetched(true);
+      }
     };
 
-      fetchAnimals();
+    fetchAnimals();
   });
 
   return (
     <>
       <main>
         {!fetched ? (
-            <Spinner></Spinner>
+          <Spinner></Spinner>
         ) : (
-          <div className='animals'>
+          <div className="animals">
             {animals.map((animal) => (
               <div key={animal.id} className="animal-container">
                 <h2>{animal.name}</h2>
