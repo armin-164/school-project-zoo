@@ -14,6 +14,24 @@ export const AnimalPage = () => {
       (animal) => animal.id.toString() === params.id
     );
 
+    const handleFeed = () => {
+        if (foundAnimal) {
+            const updatedAnimal = {
+                ...foundAnimal,
+                lastFed: new Date().toLocaleString(),
+                isFed: true,
+            };
+
+            const updatedAnimalsArray = animals.map(animal =>
+                animal.id === foundAnimal.id ? updatedAnimal : animal
+            );
+
+            setAnimals(updatedAnimalsArray);
+
+            localStorage.setItem("animals", JSON.stringify(updatedAnimalsArray));
+        }
+    };
+
     return (
         <>
         <Header></Header>
@@ -25,8 +43,8 @@ export const AnimalPage = () => {
             <span>{foundAnimal.latinName}</span>
             <img src={foundAnimal.imageUrl} alt={foundAnimal.latinName} className="animal-img"/>
             <p>{foundAnimal.longDescription}</p>
-            <p>{foundAnimal.lastFed}</p>
-            <button>Feed</button>
+            <p>Last Fed: {foundAnimal.lastFed}</p>
+            <button onClick={handleFeed} disabled={foundAnimal.isFed === true}>Feed</button>
             </>
         )}
         </>
