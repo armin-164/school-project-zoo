@@ -38,7 +38,7 @@ export const Homepage = () => {
         ) : (
           <div className="animals">
             {animals.map((animal, index) => (
-              <div key={animal.id} className="animal-container">
+              <div key={animal.id} className={`animal-container ${animal.isFed ? 'fed' : 'not-fed'}`}>
                 <h2>{animal.name}</h2>
                 <img src={animal.imageUrl} alt={animal.latinName} />
                 <p>{animal.shortDescription}</p>
