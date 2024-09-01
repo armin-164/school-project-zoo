@@ -1,29 +1,30 @@
-import { useEffect, useState } from "react"
-import { IAnimal } from "../models/IAnimal"
-import { getData } from "../services/zooService";
+import { useEffect, useState } from 'react';
+import { IAnimal } from '../models/IAnimal';
+import { getData } from '../services/zooService';
+import '../styles/Homepage.css';
 
 export const Homepage = () => {
-    const [animals, setAnimals] = useState<IAnimal[]>([]);
+  const [animals, setAnimals] = useState<IAnimal[]>([]);
 
-    useEffect(() => {
-        const fetchAnimals = async () => {
-            const data = await getData();
-            setAnimals(data);
-        }
+  useEffect(() => {
+    const fetchAnimals = async () => {
+      const data = await getData();
+      setAnimals(data);
+    };
 
-        fetchAnimals();
-    }, []);
+    fetchAnimals();
+  }, []);
 
-    return (
-        <>
-         <main>
-                {animals.map((animal) => (
-                    <div key={animal.id} className="animal-container">
-                        <h2>{animal.name}</h2>
-                        <img src={animal.imageUrl} alt={animal.latinName}/>
-                    </div>
-                ))}
-            </main>
-        </>
-    )
-}
+  return (
+    <>
+      <main>
+        {animals.map((animal) => (
+          <div key={animal.id} className="animal-container">
+            <h2>{animal.name}</h2>
+            <img src={animal.imageUrl} alt={animal.latinName} />
+          </div>
+        ))}
+      </main>
+    </>
+  );
+};
