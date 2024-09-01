@@ -5,15 +5,19 @@ import '../styles/Homepage.css';
 
 export const Homepage = () => {
   const [animals, setAnimals] = useState<IAnimal[]>([]);
+  const [fetched, setFetched] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchAnimals = async () => {
       const data = await getData();
       setAnimals(data);
+      setFetched(true);
     };
 
+    if (fetched) return;
+
     fetchAnimals();
-  }, []);
+  });
 
   return (
     <>
