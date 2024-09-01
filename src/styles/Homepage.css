@@ -26,3 +26,7 @@
   width: 400px;
   object-fit: contain;
 }
+
+.fed {
+  background-color: lightgreen;
+}
