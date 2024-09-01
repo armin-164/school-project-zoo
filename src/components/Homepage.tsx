@@ -10,14 +10,21 @@ export const Homepage = () => {
 
   useEffect(() => {
     const fetchAnimals = async () => {
-      const data = await getData();
-      setAnimals(data);
-      setFetched(true);
+        if (fetched) return;
+
+        const localStorageData = localStorage.getItem('animals');
+        if (localStorageData) {
+          setAnimals(JSON.parse(localStorageData));
+          setFetched(true);
+        } else {
+          const data = await getData();
+          localStorage.setItem('animals', JSON.stringify(data));
+          setAnimals(data);
+          setFetched(true);
+        }
     };
 
-    if (fetched) return;
-
-    fetchAnimals();
+      fetchAnimals();
   });
 
   return (
