@@ -3,6 +3,7 @@ import { IAnimal } from '../models/IAnimal';
 import { getData } from '../services/zooService';
 import '../styles/Homepage.css';
 import { Spinner } from './Spinner';
+import { Header } from './Header';
 
 export const Homepage = () => {
   const [animals, setAnimals] = useState<IAnimal[]>([]);
@@ -29,6 +30,7 @@ export const Homepage = () => {
 
   return (
     <>
+    <Header></Header>
       <main>
         {!fetched ? (
           <Spinner></Spinner>
