@@ -4,6 +4,7 @@ import { getData } from '../services/zooService';
 import '../styles/Homepage.css';
 import { Spinner } from './Spinner';
 import { Header } from './Header';
+import { Link } from 'react-router-dom';
 
 export const Homepage = () => {
   const [animals, setAnimals] = useState<IAnimal[]>([]);
@@ -36,10 +37,12 @@ export const Homepage = () => {
           <Spinner></Spinner>
         ) : (
           <div className="animals">
-            {animals.map((animal) => (
+            {animals.map((animal, index) => (
               <div key={animal.id} className="animal-container">
                 <h2>{animal.name}</h2>
                 <img src={animal.imageUrl} alt={animal.latinName} />
+                <p>{animal.shortDescription}</p>
+                <Link to={`animals/${animal.id.toString()}`} key={index.toString()}>Mer</Link>
               </div>
             ))}
           </div>
