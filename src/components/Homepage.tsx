@@ -18,12 +18,14 @@ export const Homepage = () => {
   return (
     <>
       <main>
-        {animals.map((animal) => (
-          <div key={animal.id} className="animal-container">
-            <h2>{animal.name}</h2>
-            <img src={animal.imageUrl} alt={animal.latinName} />
-          </div>
-        ))}
+        <div className='animals'>
+          {animals.map((animal) => (
+            <div key={animal.id} className="animal-container">
+              <h2>{animal.name}</h2>
+              <img src={animal.imageUrl} alt={animal.latinName} />
+            </div>
+          ))}
+        </div>
       </main>
     </>
   );
