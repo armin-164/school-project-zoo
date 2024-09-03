@@ -30,6 +30,33 @@ export const Homepage = () => {
     fetchAnimals();
   });
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+        const updatedTimeSinceFed: { [id: number]: number } = {};
+        const updatedAnimals = animals.map(animal => {
+        const lastFedTime = new Date(animal.lastFed).getTime();
+        const currentTime = new Date().getTime();
+        const timeElapsed = (currentTime - lastFedTime) / 1000;
+        updatedTimeSinceFed[animal.id] = timeElapsed;
+  
+        if (timeElapsed >= 20) {
+            alert(`${animal.name} needs to be fed again`)
+            return { ...animal, isFed: false };
+        }
+            return animal;
+        });
+        setAnimals(updatedAnimals);
+    }, 1000);
+  
+    return () => clearInterval(interval);
+  }, [animals]);
+
+  useEffect(() => {
+    if (fetched) {
+      localStorage.setItem('animals', JSON.stringify(animals));
+    }
+  }, [animals, fetched]);
+
   return (
     <>
     <Header></Header>
