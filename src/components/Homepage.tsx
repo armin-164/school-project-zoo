@@ -35,22 +35,19 @@ export const Homepage = () => {
     if (!fetched) return;
 
     const interval = setInterval(() => {
-        const updatedTimeSinceFed: { [id: number]: number } = {};
-        const updatedAnimals = animals.map(animal => {
+      setAnimals(prevAnimals => prevAnimals.map(animal => {
         const lastFedTime = new Date(animal.lastFed).getTime();
-        const currentTime = new Date().getTime();
-        const timeElapsed = (currentTime - lastFedTime) / 1000;
-        updatedTimeSinceFed[animal.id] = timeElapsed;
-  
+        const timeElapsed = (Date.now() - lastFedTime) / 1000;
+
         if (timeElapsed >= 5 && animal.isFed === true) {
-            alert(`${animal.name} needs to be fed again`)
-            return { ...animal, isFed: false };
+          alert(`${animal.name} needs to be fed again`);
+          return { ...animal, isFed: false };
         }
-            return animal;
-        });
-        setAnimals(updatedAnimals);
+
+        return animal;
+      }));
     }, 1000);
-  
+
     return () => clearInterval(interval);
   }, [animals, fetched]);
 
