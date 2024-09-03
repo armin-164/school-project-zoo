@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import { Header } from "./Header"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IAnimal } from "../models/IAnimal";
 import "../styles/AnimalPage.css";
 
@@ -8,6 +8,31 @@ export const AnimalPage = () => {
     const storedAnimals = JSON.parse(localStorage.getItem("animals") || "[]");
 
     const [animals, setAnimals] = useState<IAnimal[]>([...storedAnimals]);
+    
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const updatedTimeSinceFed: { [id: number]: number } = {};
+            const updatedAnimals = animals.map(animal => {
+            const lastFedTime = new Date(animal.lastFed).getTime();
+            const currentTime = new Date().getTime();
+            const timeElapsed = (currentTime - lastFedTime) / 1000;
+            updatedTimeSinceFed[animal.id] = timeElapsed;
+      
+            if (timeElapsed >= 20) {
+                return { ...animal, isFed: false };
+            }
+                return animal;
+            });
+            setAnimals(updatedAnimals);
+        }, 1000);
+      
+        return () => clearInterval(interval);
+      }, [animals]);
+
+      useEffect(() => {
+        localStorage.setItem('animals', JSON.stringify(animals));
+      }, [animals]);
   
     const params = useParams();
   
