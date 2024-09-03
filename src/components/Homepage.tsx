@@ -21,6 +21,7 @@ export const Homepage = () => {
         setFetched(true);
       } else {
         const data = await getData();
+        console.log(data)
         localStorage.setItem('animals', JSON.stringify(data));
         setAnimals(data);
         setFetched(true);
@@ -31,6 +32,8 @@ export const Homepage = () => {
   });
 
   useEffect(() => {
+    if (!fetched) return;
+
     const interval = setInterval(() => {
         const updatedTimeSinceFed: { [id: number]: number } = {};
         const updatedAnimals = animals.map(animal => {
@@ -40,7 +43,6 @@ export const Homepage = () => {
         updatedTimeSinceFed[animal.id] = timeElapsed;
   
         if (timeElapsed >= 20) {
-            alert(`${animal.name} needs to be fed again`)
             return { ...animal, isFed: false };
         }
             return animal;
@@ -49,7 +51,7 @@ export const Homepage = () => {
     }, 1000);
   
     return () => clearInterval(interval);
-  }, [animals]);
+  }, [animals, fetched]);
 
   useEffect(() => {
     if (fetched) {
