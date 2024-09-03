@@ -42,7 +42,8 @@ export const Homepage = () => {
         const timeElapsed = (currentTime - lastFedTime) / 1000;
         updatedTimeSinceFed[animal.id] = timeElapsed;
   
-        if (timeElapsed >= 20) {
+        if (timeElapsed >= 5 && animal.isFed === true) {
+            alert(`${animal.name} needs to be fed again`)
             return { ...animal, isFed: false };
         }
             return animal;
