@@ -1,4 +1,8 @@
-# React + TypeScript + Vite
+# The Zoo
+
+This project is a zoo management single-page application (SPA) built with React, TypeScript and Vite. It displays a list of animals with their names and descriptions, allowing users to view more details about each animal. Users can mark animals as "fed" with a button that disables once clicked, and feeding times are tracked. The app also includes features like handling broken image links and notifying users when animals need feeding again. Data is stored locally using localStorage for persistence.
+
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
